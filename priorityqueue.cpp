@@ -126,21 +126,3 @@ void PriorityQueue::removeNode(size_t i) {
   size_--;
   heapifyDown(i);
 }
-
-/*
-void PriorityQueue::heapifyUp(size_t i) {
-	// TODO: complete this function
-}
-
-void PriorityQueue::heapifyDown(size_t i) {
-	// TODO: complete this function
-}
-
-void PriorityQueue::removeNode(size_t i) {
-	// TODO: complete this function
-}
-
-Key PriorityQueue::getKey(size_t i) {
-	// TODO: complete this function
-}
-*/
