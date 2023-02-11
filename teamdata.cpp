@@ -3,9 +3,7 @@
 #include <utility>
 #include <queue>
 #include <cmath>
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
+#include "json.hpp"
 
 struct CompareTeam {
   bool operator()(const std::pair<double, std::pair<int, int>> &t1, const std::pair<double, std::pair<int, int>> &t2) {
