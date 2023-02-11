@@ -5,34 +5,38 @@
 #include <cmath>
 #include <nlohmann/json.hpp>
 
-using namespace std;
 using json = nlohmann::json;
 
 struct CompareTeam {
-  bool operator()(const pair<double, pair<int, int>> &t1, const pair<double, pair<int, int>> &t2) {
-    return abs(t1.first - 0.5) > abs(t2.first - 0.5);
+  bool operator()(const std::pair<double, std::pair<int, int>> &t1, const std::pair<double, std::pair<int, int>> &t2) {
+    return std::abs(t1.first - 0.5) > std::abs(t2.first - 0.5);
   }
 };
 
 int main(int argc, char** argv) {
-  priority_queue<pair<double, pair<int, int>>, vector<pair<double, pair<int, int>>>, CompareTeam> teamQueue;
+  std::priority_queue<std::pair<double, std::pair<int, int>>, std::vector<std::pair<double, std::pair<int, int>>>, CompareTeam> teamQueue;
 
   // Read the JSON data
   json data;
-  cin >> data;
+  try {
+    std::cin >> data;
+  } catch (const std::exception& e) {
+    std::cerr << "Error reading input JSON: " << e.what() << std::endl;
+    return 1;
+  }
 
-  int numPlayers = data["metadata"]["numPlayers"];
-  vector<vector<bool>> usedPlayers(numPlayers, vector<bool>(numPlayers, false));
-  vector<pair<int, int>> teams;
+  const int numPlayers = data["metadata"]["numPlayers"];
+  std::vector<std::vector<bool>> usedPlayers(numPlayers, std::vector<bool>(numPlayers, false));
+  std::vector<std::pair<int, int>> teams;
 
   // Load the data into the priority queue
-  auto teamStats = data["teamStats"];
-  for (auto &stat : teamStats) {
-    int playerOne = stat["playerOne"];
-    int playerTwo = stat["playerTwo"];
-    double winPercentage = stat["winPercentage"];
+  const auto& teamStats = data["teamStats"];
+  for (const auto& stat : teamStats) {
+    const int playerOne = stat["playerOne"];
+    const int playerTwo = stat["playerTwo"];
+    const double winPercentage = stat["winPercentage"];
     if (!usedPlayers[playerOne][playerTwo]) {
-      teamQueue.push(make_pair(winPercentage, make_pair(playerOne, playerTwo)));
+      teamQueue.push(std::make_pair(winPercentage, std::make_pair(playerOne, playerTwo)));
       usedPlayers[playerOne][playerTwo] = true;
       usedPlayers[playerTwo][playerOne] = true;
     }
@@ -40,11 +44,11 @@ int main(int argc, char** argv) {
 
   // Create the teams
   while (teams.size() < numPlayers / 2) {
-    auto team = teamQueue.top();
+    const auto team = teamQueue.top();
     teamQueue.pop();
 
-    int playerOne = team.second.first;
-    int playerTwo = team.second.second;
+    const int playerOne = team.second.first;
+    const int playerTwo = team.second.second;
     if (!usedPlayers[playerOne][playerTwo]) {
       teams.push_back(team.second);
       usedPlayers[playerOne][playerTwo] = true;
@@ -58,10 +62,10 @@ int main(int argc, char** argv) {
   // Output the teams
   json output;
   output["teams"] = json::array();
-  for (auto &team : teams) {
+  for (const auto& team : teams) {
     output["teams"].push_back({team.first, team.second});
   }
-  cout << output << endl;
+  std::cout << output << std::endl;
 
   return 0;
 }
