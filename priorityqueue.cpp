@@ -9,10 +9,12 @@ PriorityQueue::PriorityQueue(std::size_t max_size) :
 }
 
 void PriorityQueue::insert(Key k) {
+	// [prewritten]
 	insert(std::make_pair(k, std::make_pair(0, 0)));
 }
 
 void PriorityQueue::insert(KeyValuePair kv) {
+	// included insert func
 	if (size_ >= max_size_) {
 		return;
 	}
@@ -20,6 +22,7 @@ void PriorityQueue::insert(KeyValuePair kv) {
 	heapifyUp(size_);
 }
 
+// Edits begin here -------
 KeyValuePair PriorityQueue::min() {
 	if (size_ == 0) {
 		return KeyValuePair();
@@ -44,6 +47,8 @@ bool PriorityQueue::isEmpty() const {
 size_t PriorityQueue::size() const {
 	return size_;
 }
+
+// Edits end here ---------
 
 nlohmann::json PriorityQueue::JSON() const {
 	nlohmann::json result;
@@ -95,6 +100,7 @@ void PriorityQueue::heapifyDown(size_t i) {
   }
 }
 
+// --- incomplete from here on ---
 KeyValuePair PriorityQueue::removeMin() {
   KeyValuePair result = nodes_[ROOT];
   nodes_[ROOT] = nodes_[size_];
@@ -120,3 +126,21 @@ void PriorityQueue::removeNode(size_t i) {
   size_--;
   heapifyDown(i);
 }
+
+/*
+void PriorityQueue::heapifyUp(size_t i) {
+	// TODO: complete this function
+}
+
+void PriorityQueue::heapifyDown(size_t i) {
+	// TODO: complete this function
+}
+
+void PriorityQueue::removeNode(size_t i) {
+	// TODO: complete this function
+}
+
+Key PriorityQueue::getKey(size_t i) {
+	// TODO: complete this function
+}
+*/
