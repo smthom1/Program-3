@@ -20,6 +20,10 @@ class PriorityQueue {
     size_t size() const;
     nlohmann::json JSON() const;
 
+    //Extra functions---------
+    size_t getMaxHeapSize() const;
+    std::pair<Key, Value> getKeyValuePair(size_t i) const;
+
   private:
     void heapifyUp(size_t i);
     void heapifyDown(size_t i);
