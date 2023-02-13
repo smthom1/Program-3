@@ -12,6 +12,7 @@ class TeamData {
  private:
 	// TODO: decide the type of this variable.
 	// winPercentages_;
+	std::vector<std::vector<double>> winPercentages_;
 
 	int numPlayers_;
 
