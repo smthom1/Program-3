@@ -2,13 +2,16 @@
 #define _TEAMDATA_H_
 
 #include <string>
+#include <vector>
+#include "json.hpp"
 
 class TeamData {
  public:
  	TeamData(std::string filename);
  	int numPlayers() const;
  	double winPercentages(int i, int j) const { return winPercentages_[i][j]; }
-
+	std::vector<std::pair<int,int>> teams;
+     	nlohmann::json JSON(std::vector<std::pair<int,int>>);
  private:
 	// TODO: decide the type of this variable.
 	// winPercentages_;
