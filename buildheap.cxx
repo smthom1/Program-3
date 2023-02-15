@@ -7,7 +7,6 @@
 #include "json.hpp"
 #include "priorityqueue.h"
 
-
 using json = nlohmann::json;
 
 // Expects input file path as first argument
