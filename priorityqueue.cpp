@@ -84,7 +84,7 @@ void PriorityQueue::heapifyUp(size_t i) {
 	size_t parent = i / 2;                          // Find index of parent node
 	if (nodes_[i].first < nodes_[parent].first) {   // Swap node with parent if violates heap property
 		std::swap(nodes_[i], nodes_[parent]);
-		heapifyUp(parent);                            // Recursively continue to heapify up
+		heapifyUp(parent);                      // Recursively continue to heapify up
 	}
 }
 
