@@ -45,6 +45,7 @@ int main(int argc, char** argv){
         teamQueue.removeMin();
         //Checks if both members aren't in a team yet
         if (!playerInVector(team.first, assigned) && !playerInVector(team.second, assigned)) {
+            //adds members to a team, notes that both members have been assigned already
             finalTeams.push_back(team);
             assigned.push_back(team.first);
             assigned.push_back(team.second);
